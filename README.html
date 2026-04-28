@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagramas UML - TP1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      border: 1px solid #e5e7eb;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800 font-sans p-4 md:p-8">
+  <div class="max-w-5xl mx-auto space-y-8">
+    <header class="text-center bg-white p-6 rounded-lg shadow border border-gray-200">
+      <h1 class="text-3xl font-bold text-blue-700">Trabalho Prático 1 - Modelagem C++</h1>
+      <p class="text-gray-600 mt-2">Diagramas e Estrutura do Projeto</p>
+    </header>
+
+    <!-- Seção: Diagrama de Classes -->
+    <section class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+      <div class="mb-6">
+        <h2 class="text-2xl font-bold text-gray-800 mb-2 border-b pb-2">1. Diagrama de Classes (Domínios e Entidades)</h2>
+        <p class="text-sm text-gray-600">
+          Mapeamento das 4 entidades principais e as suas associações. Os tipos dos atributos (ex: <i>Email, Nome, Codigo</i>) correspondem diretamente às <b>Classes de Domínio</b>.
+        </p>
+      </div>
+
+      <div class="mermaid">
+        classDiagram
+        class Pessoa {
+        -email : Email
+        -nome : Nome
+        -senha : Senha
+        -papel : Papel
+        }
+        class Projeto {
+        -codigo : Codigo
+        -nome : Nome
+        -inicio : Data
+        -termino : Data
+        }
+        class PlanoDeSprint {
+        -codigo : Codigo
+        -objetivo : Texto
+        -capacidade : Tempo
+        }
+        class HistoriaDeUsuario {
+        -codigo : Codigo
+        -titulo : Texto
+        -papel : Texto
+        -acao : Texto
+        -valor : Texto
+        -estimativa : Tempo
+        -prioridade : Prioridade
+        -estado : Estado
+        }
+
+        Projeto "1" -- "1" Pessoa : Proprietario de Produto
+        Projeto "1" -- "1" Pessoa : Mestre Scrum
+        Projeto "1" *-- "*" PlanoDeSprint : possui
+        Projeto "1" o-- "*" HistoriaDeUsuario : contem
+        PlanoDeSprint "1" o-- "*" HistoriaDeUsuario : contem
+        HistoriaDeUsuario "*" -- "0..1" Pessoa : Desenvolvedor
+      </div>
+    </section>
+
+    <!-- Seção: Diagrama de Arquitetura -->
+    <section class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+      <div class="mb-6">
+        <h2 class="text-2xl font-bold text-gray-800 mb-2 border-b pb-2">2. Diagrama de Arquitetura (Módulos em Camadas)</h2>
+        <p class="text-sm text-gray-600">
+          O sistema utiliza a arquitetura baseada em camadas. A comunicação entre a Apresentação e o Serviço é feita exclusivamente através de <b>Interfaces (Classes abstratas em C++)</b>.
+        </p>
+      </div>
+
+      <div class="mermaid">
+        flowchart TD
+        subgraph CA [1. Camada de Apresentacao]
+        A1[Classes Controladoras]
+        A2[Interface do Utilizador]
+        end
+
+        subgraph IN [Interfaces C++]
+        direction LR
+        I1((IServicoAutenticacao))
+        I2((IServicoPessoa))
+        I3((IServicoProjeto))
+        end
+
+        subgraph CS [2. Camada de Servico]
+        S1[Logica de Negocio]
+        S2[(Contentores / BD)]
+        end
+
+        A1 -->|Consome metodos virtuais| IN
+        A2 -->|Recolhe e valida dados| A1
+
+        CS -.->|Herda e Implementa| IN
+        S1 -->|Acede a dados| S2
+
+        style IN fill:#e0f2fe,stroke:#0284c7,stroke-width:2px
+        style CA fill:#f3f4f6,stroke:#4b5563,stroke-width:1px
+        style CS fill:#f3f4f6,stroke:#4b5563,stroke-width:1px
+      </div>
+    </section>
+
+    <!-- Seção: Estrutura de Pastas -->
+    <section class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+      <div class="mb-6">
+        <h2 class="text-2xl font-bold text-gray-800 mb-2 border-b pb-2">3. Estruturação de Pastas do Projeto</h2>
+        <p class="text-sm text-gray-600">
+          Organização recomendada para o seu projeto em C++. Esta estrutura mapeia diretamente as <b>Entregas 1 a 6</b> do trabalho.
+        </p>
+      </div>
+
+      <div class="bg-[#1e1e1e] text-[#d4d4d4] p-5 rounded border border-gray-700 font-mono text-sm leading-relaxed overflow-x-auto shadow-inner">
+        <div><span class="text-yellow-400">📁</span> <b>Projeto_TP1/</b> <span class="text-green-400 italic"># Pasta raiz do projeto (Crie no Code::Blocks ou VS Code)</span></div>
+
+        <div class="ml-6 border-l border-gray-600 pl-4 py-1">
+          <div><span class="text-blue-400">📄</span> main.cpp <span class="text-green-400 italic"># Ponto de entrada (Chama a interface de Apresentação)</span></div>
+          <div><span class="text-blue-400">📄</span> Doxyfile <span class="text-green-400 italic"># Arquivo de configuração gerado pelo programa Doxygen</span></div>
+          <div><span class="text-blue-400">📄</span> Projeto_TP1.cbp <span class="text-green-400 italic"># Arquivo do projeto (Se usar Code::Blocks)</span></div>
+        </div>
+
+        <div class="ml-6 border-l border-gray-600 pl-4 py-1">
+          <div class="mt-2"><span class="text-yellow-400">📁</span> <b>Dominios/</b> <span class="text-[#c586c0] italic"># [ENTREGA 1] Atributos básicos validados</span></div>
+          <div class="ml-6">
+            <div><span class="text-blue-400">📄</span> Codigo.hpp / Codigo.cpp</div>
+            <div><span class="text-blue-400">📄</span> Data.hpp / Data.cpp</div>
+            <div class="text-gray-500 italic">... (Nome, Email, Texto, etc.)</div>
+          </div>
+        </div>
+
+        <div class="ml-6 border-l border-gray-600 pl-4 py-1">
+          <div class="mt-2"><span class="text-yellow-400">📁</span> <b>Entidades/</b> <span class="text-[#c586c0] italic"># [ENTREGA 2] Objetos compostos pelos domínios</span></div>
+          <div class="ml-6">
+            <div><span class="text-blue-400">📄</span> Projeto.hpp / Projeto.cpp</div>
+            <div><span class="text-blue-400">📄</span> Pessoa.hpp / Pessoa.cpp</div>
+            <div class="text-gray-500 italic">... (PlanoDeSprint, HistoriaDeUsuario)</div>
+          </div>
+        </div>
+
+        <div class="ml-6 border-l border-gray-600 pl-4 py-1">
+          <div class="mt-2"><span class="text-yellow-400">📁</span> <b>Interfaces/</b> <span class="text-[#c586c0] italic"># [ENTREGA 3] Apenas cabeçalhos (Classes Abstratas Puras)</span></div>
+          <div class="ml-6">
+            <div><span class="text-blue-400">📄</span> IServicoPessoa.hpp</div>
+            <div><span class="text-blue-400">📄</span> IApresentacaoPessoa.hpp</div>
+            <div class="text-gray-500 italic">... (NÃO VAI .cpp AQUI, pois interfaces não tem implementação)</div>
+          </div>
+        </div>
+
+        <div class="ml-6 border-l border-gray-600 pl-4 py-1">
+          <div class="mt-2"><span class="text-yellow-400">📁</span> <b>Apresentacao/</b> <span class="text-[#c586c0] italic"># [ENTREGA 4] Telas, menus e coleta de dados (cin/cout)</span></div>
+          <div class="ml-6">
+            <div><span class="text-blue-400">📄</span> CtrlApresentacaoPessoa.hpp / .cpp</div>
+          </div>
+        </div>
+
+        <div class="ml-6 border-l border-gray-600 pl-4 py-1">
+          <div class="mt-2"><span class="text-yellow-400">📁</span> <b>Servico/</b> <span class="text-[#c586c0] italic"># [ENTREGA 5] Regras de negócio e armazenamento</span></div>
+          <div class="ml-6">
+            <div><span class="text-blue-400">📄</span> CtrlServicoPessoa.hpp / .cpp <span class="text-green-400 italic"># Implementa IServicoPessoa</span></div>
+            <div><span class="text-blue-400">📄</span> ContainerPessoa.hpp / .cpp <span class="text-green-400 italic"># "Banco de dados" (std::list ou map)</span></div>
+          </div>
+        </div>
+
+        <div class="ml-6 border-l border-gray-600 pl-4 py-1">
+          <div class="mt-2"><span class="text-yellow-400">📁</span> <b>Documentacao/</b> <span class="text-[#c586c0] italic"># [GERADO PELO DOXYGEN]</span></div>
+          <div class="ml-6">
+            <div><span class="text-yellow-400">📁</span> html/</div>
+            <div class="ml-6">
+              <div><span class="text-blue-400">📄</span> index.html <span class="text-green-400 italic"># Site com toda a sua documentação do código</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ml-6 border-l border-gray-600 pl-4 py-1">
+          <div class="mt-2"><span class="text-yellow-400">📁</span> <b>Entregaveis/</b> <span class="text-[#c586c0] italic"># Para você enviar o ZIP final</span></div>
+          <div class="ml-6">
+            <div><span class="text-blue-400">🎞️</span> Teste_Fumaca.mp4 <span class="text-green-400 italic"># [ENTREGA 6]</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-center text-sm text-gray-500 mt-4 pb-8">
+      Gerado para auxiliar no planeamento do projeto TP1 de C++.
+    </footer>
+  </div>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+  </script>
+</body>
+
+</html>
