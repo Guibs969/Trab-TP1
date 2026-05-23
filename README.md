@@ -122,4 +122,4 @@ Projeto_TP1/
 
 ---
 
-
+> Gerado para auxiliar no planejamento do projeto TP1 de C++.

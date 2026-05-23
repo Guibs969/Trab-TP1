@@ -1,20 +1,33 @@
 #include "Pessoa.hpp"
 
-/**
- * @brief Implementação dos métodos de Pessoa.
- */
-void Pessoa::setNome(const std::string& nome) {
+void Pessoa::setNome(const Nome& nome) {
     this->nome = nome;
 }
 
-std::string Pessoa::getNome() const {
+Nome Pessoa::getNome() const {
     return nome;
 }
 
-void Pessoa::setEmail(const std::string& email) {
+void Pessoa::setEmail(const Email& email) {
     this->email = email;
 }
 
-std::string Pessoa::getEmail() const {
+Email Pessoa::getEmail() const {
     return email;
+}
+
+void Pessoa::setSenha(const Senha& senha) {
+    this->senha = senha;
+}
+
+Senha Pessoa::getSenha() const {
+    return senha;
+}
+
+void Pessoa::setPapel(const Papel& papel) {
+    this->papel = papel;
+}
+
+Papel Pessoa::getPapel() const {
+    return papel;
 }

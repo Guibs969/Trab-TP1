@@ -1,0 +1,28 @@
+#ifndef NOME_HPP
+#define NOME_HPP
+
+#include <string>
+#include <stdexcept>
+
+/**
+ * @brief Classe de domínio para representar um nome válido.
+ */
+class Nome {
+private:
+    std::string valor;
+public:
+    /**
+     * @brief Define o valor do nome.
+     * @param valor Nome no formato válido.
+     * @throw std::invalid_argument se o formato for inválido.
+     */
+    void setValor(const std::string& valor);
+
+    /**
+     * @brief Retorna o valor do nome.
+     * @return std::string
+     */
+    std::string getValor() const;
+};
+
+#endif // NOME_HPP

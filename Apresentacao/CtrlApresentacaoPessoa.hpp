@@ -9,7 +9,7 @@
  */
 class CtrlApresentacaoPessoa : public IApresentacaoPessoa {
 private:
-    IServicoPessoa* servicoPessoa;
+    IServicoPessoa* servicoPessoa = nullptr;
 public:
     /**
      * @brief Define o serviço de pessoa.

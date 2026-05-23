@@ -2,7 +2,10 @@
 #define PROJETO_HPP
 
 #include "../Dominios/Codigo.hpp"
-#include <string>
+#include "../Dominios/Nome.hpp"
+#include "../Dominios/Data.hpp"
+#include "../Dominios/Email.hpp"
+#include <vector>
 
 /**
  * @brief Classe de entidade para representar um projeto.
@@ -10,49 +13,36 @@
 class Projeto {
 private:
     Codigo codigo;
-    std::string nome;
-    std::string inicio;
-    std::string termino;
+    Nome nome;
+    Data inicio;
+    Data termino;
+    Email proprietario;
+    Email mestreScrum;
+    std::vector<Codigo> planos;
+    std::vector<Codigo> historias;
 public:
-    /**
-     * @brief Define o código do projeto.
-     */
     void setCodigo(const Codigo& codigo);
-
-    /**
-     * @brief Retorna o código do projeto.
-     */
     Codigo getCodigo() const;
 
-    /**
-     * @brief Define o nome do projeto.
-     */
-    void setNome(const std::string& nome);
+    void setNome(const Nome& nome);
+    Nome getNome() const;
 
-    /**
-     * @brief Retorna o nome do projeto.
-     */
-    std::string getNome() const;
+    void setInicio(const Data& inicio);
+    Data getInicio() const;
 
-    /**
-     * @brief Define a data de início.
-     */
-    void setInicio(const std::string& inicio);
+    void setTermino(const Data& termino);
+    Data getTermino() const;
 
-    /**
-     * @brief Retorna a data de início.
-     */
-    std::string getInicio() const;
+    void setProprietario(const Email& proprietario);
+    Email getProprietario() const;
 
-    /**
-     * @brief Define a data de término.
-     */
-    void setTermino(const std::string& termino);
+    void setMestreScrum(const Email& mestreScrum);
+    Email getMestreScrum() const;
 
-    /**
-     * @brief Retorna a data de término.
-     */
-    std::string getTermino() const;
+    bool adicionarPlano(const Codigo& codigoPlano);
+    bool adicionarHistoria(const Codigo& codigoHistoria);
+    std::vector<Codigo> getPlanos() const;
+    std::vector<Codigo> getHistorias() const;
 };
 
 #endif // PROJETO_HPP

@@ -1,35 +1,32 @@
 #ifndef PESSOA_HPP
 #define PESSOA_HPP
 
-#include <string>
+#include "../Dominios/Email.hpp"
+#include "../Dominios/Nome.hpp"
+#include "../Dominios/Senha.hpp"
+#include "../Dominios/Papel.hpp"
 
 /**
  * @brief Classe de entidade para representar uma pessoa.
  */
 class Pessoa {
 private:
-    std::string nome;
-    std::string email;
+    Nome nome;
+    Email email;
+    Senha senha;
+    Papel papel;
 public:
-    /**
-     * @brief Define o nome da pessoa.
-     */
-    void setNome(const std::string& nome);
+    void setNome(const Nome& nome);
+    Nome getNome() const;
 
-    /**
-     * @brief Retorna o nome da pessoa.
-     */
-    std::string getNome() const;
+    void setEmail(const Email& email);
+    Email getEmail() const;
 
-    /**
-     * @brief Define o email da pessoa.
-     */
-    void setEmail(const std::string& email);
+    void setSenha(const Senha& senha);
+    Senha getSenha() const;
 
-    /**
-     * @brief Retorna o email da pessoa.
-     */
-    std::string getEmail() const;
+    void setPapel(const Papel& papel);
+    Papel getPapel() const;
 };
 
 #endif // PESSOA_HPP
