@@ -1,18 +1,22 @@
-#ifndef IAPRESENTACAOPESSOA_HPP
-#define IAPRESENTACAOPESSOA_HPP
+#ifndef IAPRESENTACAOSISTEMA_HPP
+#define IAPRESENTACAOSISTEMA_HPP
 
 /**
- * @brief Interface para apresentação de pessoa.
+ * @brief Interface para a camada de apresentação principal.
+ * * Centraliza e orquestra a comunicação entre a interface do utilizador (UI) e 
+ * os subsistemas de apresentação especializados.
  */
-class IApresentacaoPessoa {
+class IApresentacaoSistema {
 public:
     /**
-     * @brief Executa o fluxo de apresentação.
+     * @brief Inicia a execução do fluxo principal da interface do sistema.
+     * * Este método é responsável por manter o loop principal de iteração 
+     * com o utilizador e a renderização do menu principal.
      */
     virtual void executar() = 0;
-
-    /// @brief Destrutor virtual.
-    virtual ~IApresentacaoPessoa() = default;
+    
+    /// @brief Destrutor virtual padrão.
+    virtual ~IApresentacaoSistema() = default;
 };
 
-#endif // IAPRESENTACAOPESSOA_HPP
+#endif // IAPRESENTACAOSISTEMA_HPP
