@@ -2,48 +2,44 @@
 #define CTRLAPRESENTACAOSISTEMA_HPP
 
 #include "IApresentacaoSistema.hpp"
+#include "CtrlApresentacaoPessoa.hpp"
+#include "CtrlApresentacaoProjeto.hpp"
+#include "CtrlApresentacaoPlanoSprint.hpp"
+#include "CtrlApresentacaoHistoriaUsuario.hpp"
+
 #include "../Interfaces/IServicoPessoa.hpp"
 #include "../Interfaces/IServicoProjeto.hpp"
 #include "../Interfaces/IServicoPlanoSprint.hpp"
 #include "../Interfaces/IServicoHistoriaUsuario.hpp"
 #include "../Dominios/Email.hpp"
+#include <string>
 
 /**
- * @brief Controlador principal da camada de apresentação.
+ * @brief Controlador principal (Hub). Gerencia autenticação e roteamento.
  */
 class CtrlApresentacaoSistema : public IApresentacaoSistema {
 private:
+    // Serviços originais
     IServicoPessoa* servicoPessoa;
     IServicoProjeto* servicoProjeto;
     IServicoPlanoSprint* servicoPlano;
     IServicoHistoriaUsuario* servicoHistoria;
+
+    // Sub-controladores modulares
+    CtrlApresentacaoPessoa ctrlPessoa;
+    CtrlApresentacaoProjeto ctrlProjeto;
+    CtrlApresentacaoPlanoSprint ctrlPlano;
+    CtrlApresentacaoHistoriaUsuario ctrlHistoria;
+
     bool autenticado = false;
     Email usuarioAtual;
 
-    void exibirMenu() const;
     std::string lerLinha(const std::string& prompt) const;
-    bool usuarioAutenticado() const;
-    void registrarPessoa();
     void autenticarUsuario();
-    void cadastrarProjeto();
-    void cadastrarPlano();
-    void cadastrarHistoria();
-    void listarPessoas() const;
-    void listarProjetos() const;
-    void listarPlanos() const;
-    void listarHistorias() const;
-    void listarProjetosPorPessoa() const;
-    void listarHistoriasPorProjeto() const;
-    void listarPlanosPorProjeto() const;
-    void listarHistoriasPorPlano() const;
-    void listarHistoriasPorPessoa() const;
-    void atribuirHistoria();
-    void removerDesenvolvedor();
-    void alterarEstadoHistoria();
-    void atualizarPessoa();
-    void excluirPessoa();
     void logout();
+
 public:
+    // Construtor mantido igual para não quebrar o main.cpp
     CtrlApresentacaoSistema(IServicoPessoa* servicoPessoa,
                              IServicoProjeto* servicoProjeto,
                              IServicoPlanoSprint* servicoPlano,

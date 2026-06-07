@@ -1,25 +1,20 @@
 #ifndef CTRLAPRESENTACAOPESSOA_HPP
 #define CTRLAPRESENTACAOPESSOA_HPP
 
-#include "../Interfaces/IApresentacaoPessoa.hpp"
 #include "../Interfaces/IServicoPessoa.hpp"
+#include <string>
 
-/**
- * @brief Controlador da camada de apresentação para Pessoa.
- */
-class CtrlApresentacaoPessoa : public IApresentacaoPessoa {
+class CtrlApresentacaoPessoa {
 private:
     IServicoPessoa* servicoPessoa = nullptr;
+    std::string lerLinha(const std::string& prompt) const;
 public:
-    /**
-     * @brief Define o serviço de pessoa.
-     */
     void setServicoPessoa(IServicoPessoa* servico);
-
-    /**
-     * @brief Executa o fluxo de apresentação.
-     */
-    void executar() override;
+    void cadastrar();
+    void executarLogado(const Email& usuarioAtual);
+    void listarPessoas() const;
+    void atualizarPessoa(const Email& usuarioAtual);
+    void excluirPessoa(const Email& usuarioAtual);
 };
 
-#endif // CTRLAPRESENTACAOPESSOA_HPP
+#endif
