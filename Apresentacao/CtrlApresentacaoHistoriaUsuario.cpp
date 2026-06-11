@@ -81,7 +81,7 @@ void CtrlApresentacaoHistoriaUsuario::cadastrarHistoria(const Email& usuarioAtua
         valor.setValor(lerLinha("Valor: "));
         
         Tempo estimativa;
-        // Uso da validação inteira segura
+        // Uso da validacao inteira segura
         estimativa.setValor(lerInteiroSeguro("Estimativa (1-365): "));
         
         Prioridade prioridade;

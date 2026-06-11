@@ -66,7 +66,7 @@ void CtrlApresentacaoPlanoSprint::cadastrarPlano(const Email& usuarioAtual) {
         objetivo.setValor(lerLinha("Objetivo: "));
         
         Tempo capacidade;
-        // Uso da validação inteira segura blindada contra caracteres
+        // Uso da validacao inteira segura blindada contra caracteres
         capacidade.setValor(lerInteiroSeguro("Capacidade (1-365): "));
         
         Codigo codigoProjeto;

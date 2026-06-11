@@ -8,7 +8,7 @@ CtrlApresentacaoSistema::CtrlApresentacaoSistema(IServicoPessoa* servicoPessoa,
     : servicoPessoa(servicoPessoa), servicoProjeto(servicoProjeto), 
       servicoPlano(servicoPlano), servicoHistoria(servicoHistoria) {
     
-    // Injeta os serviços nos sub-controladores
+    // Injeta os servicos nos sub-controladores
     ctrlPessoa.setServicoPessoa(servicoPessoa);
     ctrlProjeto.setServicoProjeto(servicoProjeto);
     // ctrlPlano.setServicoPlano(servicoPlano);

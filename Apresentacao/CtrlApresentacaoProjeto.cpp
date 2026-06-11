@@ -51,8 +51,6 @@ void CtrlApresentacaoProjeto::cadastrarProjeto(const Email& usuarioAtual) {
         inicio.setValor(lerLinha("Data de inicio (DD/MM/AAAA): "));
         Data termino;
         termino.setValor(lerLinha("Data de termino (DD/MM/AAAA): "));
-        Email mestreScrum;
-        mestreScrum.setValor(lerLinha("Email do Mestre Scrum: "));
 
         Projeto projeto;
         projeto.setCodigo(codigo);
@@ -60,14 +58,15 @@ void CtrlApresentacaoProjeto::cadastrarProjeto(const Email& usuarioAtual) {
         projeto.setInicio(inicio);
         projeto.setTermino(termino);
         
-        // O proprietário do projeto é automaticamente quem está logado criando o projeto
+        // O proprietario do projeto e automaticamente quem esta logado criando o projeto
         projeto.setProprietario(usuarioAtual);
-        projeto.setMestreScrum(mestreScrum);
+        // Nao pergunta o email do Mestre Scrum para simplificar
+        // Se necessario, pode ser atribuido depois por outro fluxo
 
         if (servicoProjeto->cadastrar(projeto)) {
             std::cout << "Projeto cadastrado com sucesso!\n";
         } else {
-            std::cout << "Falha no cadastro de projeto. Verifique se o codigo ja existe ou se o mestre scrum esta cadastrado com o papel correto.\n";
+            std::cout << "Falha no cadastro de projeto. Verifique se o codigo ja existe ou se o proprietario/mestre scrum estao cadastrados corretamente.\n";
         }
     } catch (const std::invalid_argument& erro) {
         std::cout << "Erro de validacao: " << erro.what() << "\n";
@@ -88,10 +87,14 @@ void CtrlApresentacaoProjeto::listarProjetos() const {
     
     std::cout << "\n--- PROJETOS CADASTRADOS ---\n";
     for (const auto& projeto : projetos) {
+        std::string mestre = projeto.getMestreScrum().getValor();
+        if (mestre.empty()) {
+            mestre = "Nenhum";
+        }
         std::cout << "Codigo: " << projeto.getCodigo().getValor()
                   << " | Nome: " << projeto.getNome().getValor()
                   << " | Proprietario: " << projeto.getProprietario().getValor()
-                  << " | Mestre Scrum: " << projeto.getMestreScrum().getValor() << "\n";
+                  << " | Mestre Scrum: " << mestre << "\n";
     }
 }
 

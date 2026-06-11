@@ -13,20 +13,19 @@ bool CtrlServicoProjeto::cadastrar(const Projeto& projeto) {
         return false;
     }
 
+    // Quem cria projeto ja e o proprietario, nao precisa verificar papel
     Pessoa proprietario;
     if (!servicoPessoa->buscar(projeto.getProprietario(), proprietario)) {
         return false;
     }
-    if (proprietario.getPapel().getValor() != "PROPRIETARIO DE PRODUTO") {
-        return false;
-    }
 
-    Pessoa mestre;
-    if (!servicoPessoa->buscar(projeto.getMestreScrum(), mestre)) {
-        return false;
-    }
-    if (mestre.getPapel().getValor() != "MESTRE SCRUM") {
-        return false;
+    // Mestre Scrum e opcional: so valida se foi informado (nao vazio)
+    std::string emailMestre = projeto.getMestreScrum().getValor();
+    if (!emailMestre.empty()) {
+        Pessoa mestre;
+        if (!servicoPessoa->buscar(projeto.getMestreScrum(), mestre)) {
+            return false;
+        }
     }
 
     return container.inserir(projeto);

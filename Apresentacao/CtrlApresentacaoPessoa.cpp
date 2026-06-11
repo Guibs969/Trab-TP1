@@ -20,13 +20,13 @@ std::string CtrlApresentacaoPessoa::lerLinha(const std::string& prompt) const {
 void CtrlApresentacaoPessoa::cadastrar() {
     try {
         Nome nome;
-        nome.setValor(lerLinha("Nome (ate 10 caracteres): "));
+        nome.setValor(lerLinha("Nome: "));
         Email email;
         email.setValor(lerLinha("Email: "));
         Senha senha;
-        senha.setValor(lerLinha("Senha (6 caracteres, alternando letras e digitos): "));
+        senha.setValor(lerLinha("Senha: "));
         Papel papel;
-        papel.setValor(lerLinha("Papel (DESENVOLVEDOR, MESTRE SCRUM, PROPRIETARIO DE PRODUTO): "));
+        papel.setValor(lerLinha("Papel: "));
 
         Pessoa pessoa;
         pessoa.setNome(nome);
