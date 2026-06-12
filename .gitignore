@@ -1,0 +1,9 @@
+*.o
+*.obj
+*.exe
+
+programa_final
+
+/output
+
+.vscode/

@@ -82,12 +82,18 @@ void CtrlApresentacaoPessoa::atualizarPessoa(const Email& usuarioAtual) {
             return;
         }
 
+        std::string senhaDigitada = lerLinha("Digite sua senha atual para confirmar a acao: ");
+        if (senhaDigitada != pessoa.getSenha().getValor()) {
+            std::cout << "Senha incorreta. Atualizacao cancelada por seguranca.\n";
+            return;
+        }
+
         Nome nome;
         nome.setValor(lerLinha("Novo nome: "));
         Senha senha;
         senha.setValor(lerLinha("Nova senha: "));
         Papel papel;
-        papel.setValor(lerLinha("Novo papel: "));
+        papel.setValor(lerLinha("Novo papel (DESENVOLVEDOR, MESTRE SCRUM, PROPRIETARIO DE PRODUTO): "));
 
         pessoa.setNome(nome);
         pessoa.setSenha(senha);
@@ -99,19 +105,24 @@ void CtrlApresentacaoPessoa::atualizarPessoa(const Email& usuarioAtual) {
             std::cout << "Falha ao atualizar pessoa.\n";
         }
     } catch (const std::invalid_argument& erro) {
-        std::cout << "Erro de validacao: " << erro.what() << "\n";
+        std::cout << "Erro de validacao do dominio: " << erro.what() << "\n";
     }
 }
 
 void CtrlApresentacaoPessoa::excluirPessoa(const Email& usuarioAtual) {
-    try {
-        // Como o menu diz "Excluir minha conta", removemos o prompt antigo que pedia e-mail e usamos direto o usuarioAtual
-        if (servicoPessoa->excluir(usuarioAtual)) {
-            std::cout << "Pessoa excluida com sucesso. Recomenda-se realizar o logout ou reiniciar a sessao.\n";
-        } else {
-            std::cout << "Falha ao excluir pessoa.\n";
+    std::string confirmacao = lerLinha("Tem certeza que deseja EXCLUIR sua conta permanentemente? (S/N): ");
+    
+    if (confirmacao == "S" || confirmacao == "s") {
+        try {
+            if (servicoPessoa->excluir(usuarioAtual)) {
+                std::cout << "Sua conta foi excluida com sucesso. Faca o logout.\n";
+            } else {
+                std::cout << "Falha ao excluir pessoa.\n";
+            }
+        } catch (const std::invalid_argument& erro) {
+            std::cout << "Erro: " << erro.what() << "\n";
         }
-    } catch (const std::invalid_argument& erro) {
-        std::cout << "Erro de validacao: " << erro.what() << "\n";
+    } else {
+        std::cout << "Exclusao cancelada.\n";
     }
 }

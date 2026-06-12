@@ -1,11 +1,14 @@
 #include "Papel.hpp"
-#include <algorithm>
-#include <cctype>
+#include <stdexcept>
 
 void Papel::setValor(const std::string& valor) {
-    if (valor.empty()) {
-        throw std::invalid_argument("Papel invalido: nao pode ser vazio.");
+    if (valor != "DESENVOLVEDOR" && 
+        valor != "MESTRE SCRUM" && 
+        valor != "PROPRIETARIO DE PRODUTO") {
+        
+        throw std::invalid_argument("Papel invalido: deve ser exatamente 'DESENVOLVEDOR', 'MESTRE SCRUM' ou 'PROPRIETARIO DE PRODUTO' (tudo em letras maiusculas).");
     }
+
     this->valor = valor;
 }
 

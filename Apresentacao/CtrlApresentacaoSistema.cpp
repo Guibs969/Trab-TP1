@@ -31,7 +31,10 @@ void CtrlApresentacaoSistema::executar() {
             std::cout << "0 - Sair\n";
             std::string opcao = lerLinha("Escolha: ");
 
-            if (opcao == "0") break;
+            if (opcao == "0") {
+                std::cout << "Encerrando o sistema.\n";
+                break;
+            }
             else if (opcao == "1") autenticarUsuario();
             else if (opcao == "2") ctrlPessoa.cadastrar();
             else std::cout << "Opcao invalida.\n";
@@ -39,22 +42,26 @@ void CtrlApresentacaoSistema::executar() {
             std::cout << "\n=== MENU PRINCIPAL ===\n";
             std::cout << "Usuario logado: " << usuarioAtual.getValor() << "\n";
             std::cout << "1 - Modulo de Projetos\n";
-            std::cout << "2 - Modulo de Planos de Sprint (em refatoracao)\n";
-            std::cout << "3 - Modulo de Historias de Usuario (em refatoracao)\n";
-            std::cout << "4 - Modulo de Pessoas (Minha Conta / Listar)\n";
+            std::cout << "2 - Modulo de Planos de Sprint\n";
+            std::cout << "3 - Modulo de Historias de Usuario\n";
+            std::cout << "4 - Modulo de Pessoas (Minha Conta / Listas)\n";
             std::cout << "8 - Logout\n";
             std::cout << "0 - Sair do Sistema\n";
             std::string opcao = lerLinha("Escolha um modulo: ");
 
-            if (opcao == "0") break;
+            if (opcao == "0") {
+                std::cout << "Encerrando o sistema.\n";
+                break;
+            }
             else if (opcao == "1") ctrlProjeto.executar(usuarioAtual);
+            else if (opcao == "2") ctrlPlano.executar(usuarioAtual);
+            else if (opcao == "3") ctrlHistoria.executar(usuarioAtual);
             else if (opcao == "4") ctrlPessoa.executarLogado(usuarioAtual);
             else if (opcao == "8") logout();
-            else std::cout << "Opcao invalida ou modulo ainda nao migrado.\n";
+            else std::cout << "Opcao invalida.\n";
         }
     }
 }
-
 void CtrlApresentacaoSistema::autenticarUsuario() {
     try {
         Email email;
