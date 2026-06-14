@@ -11,8 +11,8 @@ CtrlApresentacaoSistema::CtrlApresentacaoSistema(IServicoPessoa* servicoPessoa,
     // Injeta os servicos nos sub-controladores
     ctrlPessoa.setServicoPessoa(servicoPessoa);
     ctrlProjeto.setServicoProjeto(servicoProjeto);
-    // ctrlPlano.setServicoPlano(servicoPlano);
-    // ctrlHistoria.setServicoHistoria(servicoHistoria);
+    ctrlPlano.setServicoPlano(servicoPlano);
+    ctrlHistoria.setServicoHistoria(servicoHistoria);
 }
 
 std::string CtrlApresentacaoSistema::lerLinha(const std::string& prompt) const {

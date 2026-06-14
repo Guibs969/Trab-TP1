@@ -26,7 +26,7 @@ void CtrlApresentacaoPessoa::cadastrar() {
         Senha senha;
         senha.setValor(lerLinha("Senha: "));
         Papel papel;
-        papel.setValor(lerLinha("Papel: "));
+        papel.setValor(lerLinha("Papel ('DESENVOLVEDOR', 'MESTRE SCRUM' ou 'PROPRIETARIO DE PRODUTO'): "));
 
         Pessoa pessoa;
         pessoa.setNome(nome);
