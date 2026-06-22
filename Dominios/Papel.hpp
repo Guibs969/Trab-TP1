@@ -14,7 +14,8 @@ public:
     /**
      * @brief Define o valor do papel.
      * @param valor Papel no formato válido.
-     * @throw std::invalid_argument se o valor for inválido.
+     * @brief Strings válidas aceitas pelo método dessa classe são: "DESENVOLVEDOR", "MESTRE SCRUM", "PROPRIETARIO DE PRODUTO".
+     * @throw std::invalid_argument Exceção é lançada caso string inserida for diferente das strings específicadas acima.
      */
     void setValor(const std::string& valor);
 
