@@ -12,8 +12,8 @@ private:
 public:
     /**
      * @brief Define o valor do tempo.
-     * @param valor Tempo em dias.
-     * @throw std::invalid_argument se o valor for inválido.
+     * @param valor é um número inteiro entre 1 e 365.
+     * @throw std::invalid_argument Exceção é lançada caso seja inserido número fora do intervalo específicado.
      */
     void setValor(int valor);
 
