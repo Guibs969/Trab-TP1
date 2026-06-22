@@ -12,9 +12,9 @@ private:
     std::string valor;
 public:
     /**
-     * @brief Define o valor do código.
-     * @param valor Código no formato: 2 letras maiúsculas + 3 dígitos.
-     * @throw std::invalid_argument se o formato for inválido.
+     ///* @brief Define o valor do código.
+     * @param valor 5 caracteres, sendo letras maiúsculas(A-Z)os dois primeiros caracteres e os três últimos sendo dígitos(0-9).
+     * @throw std::invalid_argument Exceção é lançada caso as especificações acima não sejam atendidas.
      */
     void setValor(const std::string& valor);
 
